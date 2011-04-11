@@ -1,0 +1,12 @@
+---
+layout: default
+title: Michael Levin
+---
+
+{% for post in site.posts %}
+  <div id="post">
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <p class="date-sub-head">{{ post.date | date: "%A, %B %d, %Y" }}</p>
+    <p>{{ post.content }}</p>
+  </div>
+{% endfor %}
