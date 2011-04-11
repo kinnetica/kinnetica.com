@@ -90,12 +90,12 @@ em {
   padding: 0;
 }
 
-#post {
+.post {
   margin-bottom: 40px;
   width: 80%;
 }
 
-#post h2 {
+.post h2 {
   font-family: 'Yanone Kaffeesatz';
   font-size: 30px;
   margin: 0;
