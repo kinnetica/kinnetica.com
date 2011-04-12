@@ -2,9 +2,10 @@
 layout: post
 title: CSS Selection Attribute
 category: css
+description: Details about how the CSS selection element works.
 ---
 
-One of the lesser-known features of CSS is the option to style text selected by the user. This is achieved using the `::selection` attribute. Here is an example:
+One of the lesser-known features of CSS is the option to style text selected by the user. This is achieved using the `::selection` pseudo-element. Here is an example:
 
 {% highlight css %}
 ::selection {
@@ -18,11 +19,11 @@ One of the lesser-known features of CSS is the option to style text selected by 
 }
 {% endhighlight %}
 
-Firefox currently requires the `-moz` preface when using the attribute. This selector will work on all modern browsers (Chrome, Firefox, Safari, Opera, IE9). There is no support for earlier versions of Internet Explorer.
+Firefox currently requires the `-moz` preface when using the element. This element will work on all modern browsers (Chrome, Firefox, Safari, Opera, IE9). There is no support for earlier versions of Internet Explorer.
 
 Although a feature like this should be used sparingly, sometimes it can be used to produce good-looking results. An example of where this feature is used well is Paul Irish's [CSS3 Please](http://css3please.com "CSS3 Please") site.
 
-The `::selection` attribute was originally written in the CSS3 draft spec, but was later removed. However, it has already been implemented in all major browsers and should continue to be supported in the future.
+The `::selection` pseudo-element was originally written in the CSS3 draft spec, but was later removed. However, it has already been implemented in all major browsers and should continue to be supported in the future.
 
 Note: Only the `color`, `background`, and `background-color` CSS properties will work with `::selection`.
 

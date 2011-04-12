@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Come In, We're Open
+description: Welcome post to new readers of Kinnetica explaining a little bit about the author and purpose of the blog.
 ---
 
 Hello, there! My name is Michael Levin and I am a web developer living in the Washington, D.C. area. You can find out a little more about me by looking at my [about](/about) and [resume](/resume) pages.
