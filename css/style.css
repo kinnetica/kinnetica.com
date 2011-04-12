@@ -4,7 +4,7 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
-  background: #eaeaea;
+  background: url('/images/bg.png');
 }
 
 h1 {
@@ -34,9 +34,11 @@ em {
   padding: 0 30px;
   text-align: left;
   background: white;
-  -moz-box-shadow: 0px 0px 4px #000000;
-  -webkit-box-shadow: 0px 0px 4px #000000;
-  box-shadow: 0px 0px 4px #000000;
+  -moz-box-shadow: 0px 0px 6px #000000;
+  -webkit-box-shadow: 0px 0px 6px #000000;
+  box-shadow: 0px 0px 6px #000000;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Glow(color=#666666,strength=3) progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135, strength=5)";
+  filter: progid:DXImageTransform.Microsoft.Glow(color=#666666,strength=3) progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135, strength=5);
 }
 
 #header {
