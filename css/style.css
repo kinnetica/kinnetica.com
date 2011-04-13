@@ -34,9 +34,9 @@ em {
   padding: 0 30px;
   text-align: left;
   background: white;
-  -moz-box-shadow: 0px 0px 16px #ffffff;
-  -webkit-box-shadow: 0px 0px 16px #ffffff;
-  box-shadow: 0px 0px 16px #ffffff;
+  -moz-box-shadow: 0px 0px 10px #ffffff;
+  -webkit-box-shadow: 0px 0px 10px #ffffff;
+  box-shadow: 0px 0px 10px #ffffff;
   -ms-filter: "progid:DXImageTransform.Microsoft.Glow(color=#666666,strength=3) progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=135, strength=5)";
   filter: progid:DXImageTransform.Microsoft.Glow(color=#666666,strength=3) progid:DXImageTransform.Microsoft.Shadow(color=#ffffff,direction=135, strength=5);
 }
@@ -59,7 +59,7 @@ em {
 #nav {
   float: right;
   margin-top: 30px;
-  border-bottom: 3px solid #003366;
+  border-bottom: 3px solid #26517d;
   width: 795px;
   height: 50px;
   text-align: right;
@@ -72,7 +72,7 @@ em {
 
 #nav a {
   text-decoration: none;
-  color: #000000;
+  color: #000;
   font-weight: bold;
 }
 
@@ -104,7 +104,7 @@ em {
 }
 
 a {
-  color: #003366;
+  color: #26517d;
 }
 
 /* Resume */
