@@ -59,7 +59,7 @@ em {
 #nav {
   float: right;
   margin-top: 30px;
-  border-bottom: 3px solid #26517d;
+  border-bottom: 3px solid #0e5282;
   width: 795px;
   height: 50px;
   text-align: right;
@@ -104,7 +104,7 @@ em {
 }
 
 a {
-  color: #26517d;
+  color: #0e5282;
 }
 
 /* Resume */

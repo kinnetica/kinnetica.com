@@ -3,6 +3,7 @@ layout: post
 title: CSS Selection Attribute
 category: css
 description: Details about how the CSS selection element works.
+keywords: css,css3,selection,highlight,element
 ---
 
 One of the lesser-known features of CSS is the option to style text selected by the user. This is achieved using the `::selection` pseudo-element. Here is an example:
