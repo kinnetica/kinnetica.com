@@ -6,37 +6,42 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>http://www.kinnetica.com/</loc>
-    <lastmod>2011-04-15T22:28:20+00:00</lastmod>
+    <lastmod>2011-04-15</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>http://www.kinnetica.com/archive/</loc>
-    <lastmod>2011-04-15T22:28:19+00:00</lastmod>
+    <lastmod>2011-04-15</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>http://www.kinnetica.com/resume/</loc>
-    <lastmod>2011-04-15T22:28:23+00:00</lastmod>
+    <lastmod>2011-04-15</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>http://www.kinnetica.com/about/</loc>
-    <lastmod>2011-04-15T22:28:19+00:00</lastmod>
+    <lastmod>2011-04-16</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>http://www.kinnetica.com/2011/04/15/ad-subsidized-kindle/</loc>
+    <lastmod>2011-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>http://www.kinnetica.com/css/2011/04/10/css-selection-attribute/</loc>
-    <lastmod>2011-04-15T22:28:24+00:00</lastmod>
+    <lastmod>2011-04-15</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>http://www.kinnetica.com/2011/04/10/come-in-we-are-open/</loc>
-    <lastmod>2011-04-15T22:28:23+00:00</lastmod>
+    <lastmod>2011-04-15</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>http://www.kinnetica.com/docs/Levin_Resume.pdf</loc>
-    <lastmod>2011-04-15T22:28:22+00:00</lastmod>
+    <lastmod>2011-04-15</lastmod>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
