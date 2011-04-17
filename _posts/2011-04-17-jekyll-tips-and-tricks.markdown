@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jekyll - 7 Tips & Tricks
+title: Jekyll - 7 Tips &amp; Tricks
 description: Useful tips and tricks for setting up your personal blog using Jekyll.
 keywords: jekyll,tips,tricks,documentation,samples,automatic refresh,drafts,metadata
 ---
