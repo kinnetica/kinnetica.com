@@ -3,6 +3,7 @@ layout: post
 title: Jekyll - 7 Tips &amp; Tricks
 description: Useful tips and tricks for setting up your personal blog using Jekyll.
 keywords: jekyll,tips,tricks,documentation,samples,automatic refresh,drafts,metadata
+change_frequency: monthly
 ---
 
 Instead of going with Wordpress or Tumblr for this blog, I decided to try out [Jekyll](https://github.com/mojombo/jekyll). I was very happy with the experience, and thought I would share some of the lessons I learned to hopefully make the process easier for others.

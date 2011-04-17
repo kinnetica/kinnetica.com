@@ -3,6 +3,7 @@ layout: post
 title: Kindle To Lead Ad-Subsidized Hardware Revolution 
 description: Analysis of Amazon's new ad-subsidized Kindle offering and its business model implications.
 keywords: kindle,amazon,advertisement,ad,subsidized
+change_frequency: monthly
 ---
 
 You go online, you see ads. You turn on the television, you watch ads. You're driving on the highway, you pass ads. How often do you really get to make or save any money just for seeing ads?
