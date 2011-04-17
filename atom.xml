@@ -5,10 +5,10 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>Kinnetica</title>
- <link href="http://kinnetica.com/atom.xml" rel="self"/>
- <link href="http://kinnetica.com/"/>
+ <link href="http://www.kinnetica.com/atom.xml" rel="self"/>
+ <link href="http://www.kinnetica.com/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://kinnetica.com/</id>
+ <id>http://www.kinnetica.com/</id>
  <author>
    <name>Michael Levin</name>
    <email>michael@kinnetica.com</email>
@@ -17,9 +17,9 @@ layout: nil
  {% for post in site.posts %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="http://kinnetica.com{{ post.url }}"/>
+   <link href="http://www.kinnetica.com{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://kinnetica.com{{ post.id }}</id>
+   <id>http://www.kinnetica.com{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}
