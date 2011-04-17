@@ -102,6 +102,10 @@ em {
   width: 80%;
 }
 
+.post-footer {
+  font-style: italic;
+}
+
 .post h2 {
   font-family: 'Yanone Kaffeesatz';
   font-size: 30px;
