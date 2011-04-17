@@ -125,7 +125,7 @@ ul {
   margin-top: 5px;
 }
 
-li {
+ul li {
   list-style: circle;
   padding: 5px;
 }
