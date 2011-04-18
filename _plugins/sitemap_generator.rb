@@ -66,6 +66,8 @@ module Jekyll
   end
 
   class SitemapGenerator < Generator
+    safe true
+    
     # Change MY_URL to reflect the site you are using
     MY_URL = "http://www.kinnetica.com"
 
@@ -186,7 +188,7 @@ module Jekyll
         layout = layouts[layout.data["layout"]]
       end
 
-      return latest_date.strftime("%Y-%m-%d")
+      return latest_date.strftime("%Y-%m-%dT%H:%M:%S%Z");
     end
 
     # Is the page or post listed as something we want to exclude?
