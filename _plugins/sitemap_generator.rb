@@ -67,10 +67,10 @@ module Jekyll
 
   class SitemapGenerator < Generator
     # Change MY_URL to reflect the site you are using
-    MY_URL = "http://www.mysite.com"
+    MY_URL = "http://www.kinnetica.com"
 
     # Any files to exclude from being included in the sitemap.xml
-    EXCLUDED_FILES = []
+    EXCLUDED_FILES = ["atom.xml"]
 
     # Custom variable names for changefreq and priority elements
     #
