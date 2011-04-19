@@ -1,10 +1,10 @@
-# Sitemap Generator is a Jekyll plugin that generated a sitemap.xml file
+# Sitemap Generator is a Jekyll plugin that generates a sitemap.xml file
 #
 # How To Use: 
 #   1.) Copy File Into _plugins/ folder within your Jekyll project
 #   2.) Change MY_URL to reflect your domain name
-#   2.) Run Jekyll: jekyll --server --auto
-#   3.) sitemap.xml should be included in _site/ folder
+#   3.) Run Jekyll: jekyll --server --auto
+#   4.) sitemap.xml should be included in _site/ folder
 #
 # Customizations:
 #   1.) If there are any files you don't want included in the sitemap, add them
@@ -12,7 +12,7 @@
 #       file.
 #   2.) If you want to include the optional changefreq and priority attributes,
 #       simply include custom variables in the YAML Front Matter of that file.
-#       The names of these variables are defined below in the
+#       The names of these custom variables are defined below in the
 #       CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME and PRIORITY_CUSTOM_VARIABLE_NAME
 #       constants.
 # 
@@ -35,7 +35,7 @@ module Jekyll
     attr_accessor :name
 
     def full_path_to_source
-      return File.join(@base, @name)
+      File.join(@base, @name)
     end
   end
 
@@ -43,13 +43,13 @@ module Jekyll
     attr_accessor :name
 
     def full_path_to_source
-      return File.join(@base, @dir, @name)
+      File.join(@base, @dir, @name)
     end
   end
 
   class Layout
     def full_path_to_source
-      return File.join(@base, @name)
+      File.join(@base, @name)
     end
   end
 
@@ -61,18 +61,16 @@ module Jekyll
       rescue
       end
       
-      return true
+      true
     end
   end
 
   class SitemapGenerator < Generator
-    safe true
-    
     # Change MY_URL to reflect the site you are using
-    MY_URL = "http://www.kinnetica.com"
+    MY_URL = "http://www.mysite.com"
 
     # Any files to exclude from being included in the sitemap.xml
-    EXCLUDED_FILES = ["atom.xml"]
+    EXCLUDED_FILES = []
 
     # Custom variable names for changefreq and priority elements
     #
@@ -143,7 +141,7 @@ module Jekyll
         url.add_element(priority)
       end
 
-      return url
+      url
     end
 
     # Get URL location of page or post 
@@ -151,14 +149,15 @@ module Jekyll
     # Returns the location of the page or post
     def fill_location(path)
       loc = REXML::Element.new "loc"
-
+      
       # Avoid displaying trailing /index.html in the path
       if (path != "/index.html")
         loc.text = "#{MY_URL}#{path}"
       else
         loc.text = MY_URL
       end
-      return loc
+      
+      loc
     end
 
     # Fill lastmod XML element with the last modified date for the page or post.
@@ -169,7 +168,8 @@ module Jekyll
       path = page_or_post.full_path_to_source
       date = File.mtime(path)
       lastmod.text = find_latest_date(date, site, page_or_post)
-      return lastmod
+      
+      lastmod
     end
 
     # Go through the page/post and any implemented layouts and get the latest
@@ -188,14 +188,14 @@ module Jekyll
         layout = layouts[layout.data["layout"]]
       end
 
-      return latest_date.iso8601
+      latest_date.iso8601
     end
 
     # Is the page or post listed as something we want to exclude?
     #
     # Returns boolean
     def excluded?(name)
-      return EXCLUDED_FILES.include? name
+      EXCLUDED_FILES.include? name
     end
 
   end
