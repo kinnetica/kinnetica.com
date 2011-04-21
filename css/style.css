@@ -112,6 +112,10 @@ em {
   margin: 0;
 }
 
+.sub-project {
+    font-style: italic;
+}
+
 a {
   color: #0e5282;
 }
