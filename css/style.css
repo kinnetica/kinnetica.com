@@ -120,6 +120,14 @@ a {
   color: #0e5282;
 }
 
+.date-sub-head {
+  color: #666;
+}
+
+.date-sub-head a {
+  color: #666;
+}
+
 /* Resume */
 
 #resume h2 {
