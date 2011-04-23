@@ -138,6 +138,20 @@ ul li {
   padding: 5px;
 }
 
+.project-description {
+  width: 80%;
+  float:left;
+}
+
+.project-description-sidebar {
+  float: right;
+  margin: 20px 50px 0 0;
+}
+
+.project-description ol li {
+  line-height: 190%
+}
+
 .skill-group {
   font-size: 15px;
   font-weight: bold;
