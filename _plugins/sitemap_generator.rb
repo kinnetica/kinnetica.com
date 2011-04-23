@@ -32,7 +32,7 @@
 require 'rexml/document'
 
 module Jekyll
-  
+
   # Change MY_URL to reflect the site you are using
   MY_URL = "http://www.kinnetica.com"
   
@@ -63,7 +63,7 @@ module Jekyll
   end
 
   class Page
-    attr_accessor :name, :base, :dir
+    attr_accessor :name
 
     def full_path_to_source
       File.join(@base, @dir, @name)
@@ -97,10 +97,10 @@ module Jekyll
   end
 
   class SitemapGenerator < Generator
-    
+
     # Valid values allowed by sitemap.xml spec for change frequencies
     VALID_CHANGE_FREQUENCY_VALUES = ["always", "hourly", "daily", "weekly",
-      "monthly", "yearly", "never"]
+      "monthly", "yearly", "never"] 
 
     # Goes through pages and posts and generates sitemap.xml file
     #
@@ -155,7 +155,7 @@ module Jekyll
       if (page_or_post.data[CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME])
         change_frequency = 
           page_or_post.data[CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME].downcase
-
+        
         if (valid_change_frequency?(change_frequency))
           changefreq = REXML::Element.new "changefreq"
           changefreq.text = 
