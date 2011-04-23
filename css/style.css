@@ -97,9 +97,12 @@ em {
   padding: 0;
 }
 
+#post-wrapper {
+  width: 80%;
+}
+
 .post {
   margin-bottom: 40px;
-  width: 80%;
 }
 
 .post-footer {
@@ -110,6 +113,12 @@ em {
   font-family: 'Yanone Kaffeesatz';
   font-size: 30px;
   margin: 0;
+}
+
+.pagination {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .sub-project {
