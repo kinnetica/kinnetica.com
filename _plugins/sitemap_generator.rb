@@ -43,6 +43,10 @@ module Jekyll
   # Any files to exclude from being included in the sitemap.xml
   EXCLUDED_FILES = ["atom.xml"]
   
+  # Any files that include posts, so that when a new post is added, the last
+  # modified date should take that into account
+  PAGES_INCLUDE_POSTS = ["index.html", "archive.html"]
+  
   # Custom variable names for changefreq and priority elements
   #
   # These names are used within the YAML Front Matter of pages or posts
@@ -112,19 +116,13 @@ module Jekyll
       urlset.add_attribute("xmlns", 
         "http://www.sitemaps.org/schemas/sitemap/0.9")
 
-      site.pages.each do |page|
-        if !excluded?(page.name)
-          url = fill_url(site, page)
-          urlset.add_element(url)
-        end
-      end
+      @last_modified_post_date = fill_posts(site, urlset)
+      normal_pages, pagination_pages = split_pages_by_type(site)
 
-      site.posts.each do |post|
-        if !excluded?(post.name)
-          url = fill_url(site, post)
-          urlset.add_element(url)
-        end
-      end
+      index_modified_date = fill_normal_pages(site, normal_pages, urlset)
+      
+      # puts @last_modified_index_date
+      fill_pagination_pages(site, pagination_pages, urlset)
       
       sitemap.add_element(urlset)
 
@@ -139,18 +137,78 @@ module Jekyll
       site.static_files << Jekyll::SitemapFile.new(site, site.dest, "/", SITEMAP_FILE_NAME)
     end
 
+    # Create url elements for all the posts and find the date of the latest one
+    #
+    # Returns last_modified_date of latest post
+    def fill_posts(site, urlset)
+      last_modified_date = nil
+      site.posts.each do |post|
+        if !excluded?(post.name)
+          url = fill_url(site, post, false)
+          urlset.add_element(url)
+        end
+        
+        path = post.full_path_to_source
+        date = File.mtime(path)
+        last_modified_date = date if last_modified_date == nil or date > last_modified_date
+      end
+      
+      last_modified_date
+    end
+    
+    # Create url elements for all the normal pages and find the date of the
+    # index to use with the pagination pages
+    #
+    # Returns last_modified_date of index page
+    def fill_normal_pages(site, normal_pages, urlset)
+      normal_pages.each do |page|
+        if !excluded?(page.name)
+          url = fill_url(site, page, false)
+          urlset.add_element(url)
+        end
+      end
+    end
+    
+    def fill_pagination_pages(site, pagination_pages, urlset)
+      pagination_pages.each do |page|
+        url = fill_url(site, page, true)
+        urlset.add_element(url)
+      end
+    end
+    
+    def split_pages_by_type(site)
+      normal_pages = []
+      pagination_pages = []
+      
+      site.pages.each do |page|
+        path = page.full_path_to_source
+        if File.exists?(path)
+          normal_pages << page
+        else
+          pagination_pages << page
+        end
+      end
+      
+      [normal_pages, pagination_pages]
+    end
+
     # Fill data of each URL element: location, last modified, 
     # change frequency (optional), and priority.
     #
     # Returns url REXML::Element
-    def fill_url(site, page_or_post)
+    def fill_url(site, page_or_post, pagination_page)
       url = REXML::Element.new "url"
 
       loc = fill_location(page_or_post)
       url.add_element(loc)
 
-      lastmod = fill_last_modified(site, page_or_post)
-      url.add_element(lastmod) if lastmod
+      if pagination_page
+        lastmod = fill_last_modified_pagination(site, page_or_post)
+        url.add_element(lastmod) if lastmod
+      else
+        lastmod = fill_last_modified(site, page_or_post)
+        url.add_element(lastmod) if lastmod
+      end
 
       if (page_or_post.data[CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME])
         change_frequency = 
@@ -158,8 +216,7 @@ module Jekyll
         
         if (valid_change_frequency?(change_frequency))
           changefreq = REXML::Element.new "changefreq"
-          changefreq.text = 
-            change_frequency
+          changefreq.text = change_frequency
           url.add_element(changefreq)
         else
           puts "ERROR: Invalid Change Frequency In #{page_or_post.name}"
@@ -192,14 +249,43 @@ module Jekyll
 
     # Fill lastmod XML element with the last modified date for the page or post.
     #
-    # Returns lastmod REXML::Element or nil if can't find path
+    # Returns lastmod REXML::Element or nil
     def fill_last_modified(site, page_or_post)
       path = page_or_post.full_path_to_source
       if File.exists?(path)
         lastmod = REXML::Element.new "lastmod"
         date = File.mtime(path)
-        lastmod.text = find_latest_date(date, site, page_or_post)
-      
+        latest_date = find_latest_date(date, site, page_or_post)
+
+        if @last_modified_post_date == nil
+          # This is a post
+          lastmod.text = latest_date.iso8601
+        else
+          # This is a normal page
+          if posts_included?(page_or_post.name)
+            # We want to take into account the last post date
+            final_date = greater_date(latest_date, @last_modified_post_date)
+            lastmod.text = final_date.iso8601
+          else
+            lastmod.text = latest_date.iso8601
+          end
+
+          @last_modified_index_date = final_date if page_or_post.name == 'index.html'
+        end
+        lastmod
+      else
+        nil
+      end
+    end
+    
+    # Fill lastmod XML element for pagination pages.
+    #
+    # Returns lastmod REXML::Element or nil
+    def fill_last_modified_pagination(site, page_or_post)
+      if @last_modified_index_date
+        lastmod = REXML::Element.new "lastmod"
+        lastmod.text = @last_modified_index_date.iso8601
+        
         lastmod
       else
         nil
@@ -222,7 +308,18 @@ module Jekyll
         layout = layouts[layout.data["layout"]]
       end
 
-      latest_date.iso8601
+      latest_date
+    end
+
+    # Which of the two dates is later
+    #
+    # Returns latest of two dates
+    def greater_date(date1, date2)
+      if (date1 >= date2) 
+        date1
+      else 
+        date2 
+      end
     end
 
     # Is the page or post listed as something we want to exclude?
@@ -230,6 +327,10 @@ module Jekyll
     # Returns boolean
     def excluded?(name)
       EXCLUDED_FILES.include? name
+    end
+    
+    def posts_included?(name)
+      PAGES_INCLUDE_POSTS.include? name
     end
     
     # Is the change frequency value provided valid according to the spec
