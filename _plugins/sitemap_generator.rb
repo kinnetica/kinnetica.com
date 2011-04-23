@@ -3,8 +3,10 @@
 # How To Use: 
 #   1.) Copy File Into _plugins/ folder within your Jekyll project
 #   2.) Change MY_URL to reflect your domain name
-#   3.) Run Jekyll: jekyll --server --auto
-#   4.) sitemap.xml should be included in _site/ folder
+#   3.) Change SITEMAP_FILE_NAME if you want your sitemap to be called something
+#       other than sitemap.xml
+#   4.) Run Jekyll: jekyll --server --auto
+#   5.) sitemap.xml should be included in _site/ folder
 #
 # Customizations:
 #   1.) If there are any files you don't want included in the sitemap, add them
@@ -30,6 +32,23 @@
 require 'rexml/document'
 
 module Jekyll
+  
+  # Change MY_URL to reflect the site you are using
+  MY_URL = "http://www.kinnetica.com"
+  
+  # Change SITEMAP_FILE_NAME if you would like your sitemap file
+  # to be called something else
+  SITEMAP_FILE_NAME = "sitemap.xml"
+  
+  # Any files to exclude from being included in the sitemap.xml
+  EXCLUDED_FILES = ["atom.xml"]
+  
+  # Custom variable names for changefreq and priority elements
+  #
+  # These names are used within the YAML Front Matter of pages or posts
+  # for which you want to include these properties
+  CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME = "change_frequency"
+  PRIORITY_CUSTOM_VARIABLE_NAME = "priority"
 
   class Post
     attr_accessor :name
@@ -37,13 +56,25 @@ module Jekyll
     def full_path_to_source
       File.join(@base, @name)
     end
+    
+    def location_on_server
+      "#{MY_URL}#{url}"
+    end
   end
 
   class Page
-    attr_accessor :name
+    attr_accessor :name, :base, :dir
 
     def full_path_to_source
       File.join(@base, @dir, @name)
+    end
+    
+    def location_on_server
+      if (url != "/index.html")
+        return "#{MY_URL}#{@dir}#{url}"
+      else
+        return "#{MY_URL}#{@dir}/"
+      end
     end
   end
 
@@ -66,21 +97,8 @@ module Jekyll
   end
 
   class SitemapGenerator < Generator
-    # Change MY_URL to reflect the site you are using
-    MY_URL = "http://www.kinnetica.com"
-
-    SITEMAP_FILE_NAME = "sitemap.xml"
-
-    # Any files to exclude from being included in the sitemap.xml
-    EXCLUDED_FILES = ["atom.xml"]
-
-    # Custom variable names for changefreq and priority elements
-    #
-    # These names are used within the YAML Front Matter of pages or posts
-    # for which you want to include these properties
-    CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME = "change_frequency"
-    PRIORITY_CUSTOM_VARIABLE_NAME = "priority"
     
+    # Valid values allowed by sitemap.xml spec for change frequencies
     VALID_CHANGE_FREQUENCY_VALUES = ["always", "hourly", "daily", "weekly",
       "monthly", "yearly", "never"]
 
@@ -128,16 +146,16 @@ module Jekyll
     def fill_url(site, page_or_post)
       url = REXML::Element.new "url"
 
-      loc = fill_location(page_or_post.url)
+      loc = fill_location(page_or_post)
       url.add_element(loc)
 
       lastmod = fill_last_modified(site, page_or_post)
-      url.add_element(lastmod)
+      url.add_element(lastmod) if lastmod
 
       if (page_or_post.data[CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME])
         change_frequency = 
           page_or_post.data[CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME].downcase
-        
+
         if (valid_change_frequency?(change_frequency))
           changefreq = REXML::Element.new "changefreq"
           changefreq.text = 
@@ -165,29 +183,27 @@ module Jekyll
     # Get URL location of page or post 
     #
     # Returns the location of the page or post
-    def fill_location(path)
+    def fill_location(page_or_post)
       loc = REXML::Element.new "loc"
-      
-      # Avoid displaying trailing /index.html in the path
-      if (path != "/index.html")
-        loc.text = "#{MY_URL}#{path}"
-      else
-        loc.text = MY_URL
-      end
+      loc.text = page_or_post.location_on_server
       
       loc
     end
 
     # Fill lastmod XML element with the last modified date for the page or post.
     #
-    # Returns lastmod REXML::Element
+    # Returns lastmod REXML::Element or nil if can't find path
     def fill_last_modified(site, page_or_post)
-      lastmod = REXML::Element.new "lastmod"
       path = page_or_post.full_path_to_source
-      date = File.mtime(path)
-      lastmod.text = find_latest_date(date, site, page_or_post)
+      if File.exists?(path)
+        lastmod = REXML::Element.new "lastmod"
+        date = File.mtime(path)
+        lastmod.text = find_latest_date(date, site, page_or_post)
       
-      lastmod
+        lastmod
+      else
+        nil
+      end
     end
 
     # Go through the page/post and any implemented layouts and get the latest
