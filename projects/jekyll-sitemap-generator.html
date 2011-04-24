@@ -18,15 +18,15 @@ permalink: /jekyll-sitemap-generator/index.html
     <li>Copy file into your _plugins folder within your Jekyll project.</li>
     <li>Change MY_URL to reflect your domain name.</li>
     <li>Change SITEMAP_FILE_NAME if you want your sitemap to be called something other than sitemap.xml.</li>
-    <li>Change the PAGES_INCLUDE_POSTS list to include any pages that are looping through your posts (e.g. "index.html", "archive.html", etc.). This will ensure that right after you make a new post, the last modified date will be updated to reflect the new post.</li>
-    <li>Run Jekyll: jekyll --server to re-generate your site.</li>
+    <li>Change the PAGES_INCLUDE_POSTS list to include any pages that are looping through your posts (e.g. "index.html", "archive.html", etc.). This will ensure that right after you make a new post, the last modified date of those pages will be updated to reflect the new post.</li>
+    <li>Run Jekyll: jekyll --server to regenerate your site.</li>
     <li>A sitemap.xml should be included in your _site folder.</li>
   </ol>
 
   <h3>Customizations:</h3>
 
   <ol>
-    <li>If there are any files you don't want included in the sitemap, add them to the EXCLUDED_FILES list. The name should match the name of the source file.</li>
+    <li>If there are any files you don't want included in the sitemap, add the names of the files to the EXCLUDED_FILES list.</li>
     <li>If you want to include the optional changefreq and priority attributes, simply include custom variables in the YAML Front Matter of those files. The names of these custom variables are defined in the source file in the CHANGE_FREQUENCY_CUSTOM_VARIABLE_NAME and PRIORITY_CUSTOM_VARIABLE_NAME constants.</li>
   </ol>
   
@@ -34,7 +34,7 @@ permalink: /jekyll-sitemap-generator/index.html
 
   <ol>
     <li>The last modified date is determined by the latest date of the following: system modified date of the page or post, system modified date of included layout, system modified date of included layout within that layout, ...</li>
-    <li>The source for this project is available in a GitHub repository <a href="https://github.com/kinnetica/jekyll-plugins">here</a>.</li>
+    <li>This project is available on GitHub <a href="https://github.com/kinnetica/jekyll-plugins">here</a>.</li>
   </ol>
 </div>
 <div class="project-description-sidebar">
