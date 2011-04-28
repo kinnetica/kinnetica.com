@@ -2,3 +2,4 @@ pygments: true
 permalink: pretty
 markdown: rdiscount
 paginate: 5
+exclude: ["deploy.sh", "README.md"]
