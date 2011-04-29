@@ -219,6 +219,30 @@ ul li {
   font-style: italic;
 }
 
+@-webkit-keyframes not-found-fade {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.not-found {
+  -webkit-animation: not-found-fade 20s;
+  margin-top: 100px;
+}
+
+.not-found h1 {
+  font-family: 'Yanone Kaffeesatz';
+  font-size: 160px;
+}
+
+.not-found h2 {
+  font-family: 'Yanone Kaffeesatz';
+  font-size: 40px;
+}
+
 /* Pygment */
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
