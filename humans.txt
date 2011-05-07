@@ -1,0 +1,16 @@
+/* TEAM */
+  Left Brain: Michael Levin
+  Contact: michael [at] kinnetica.com
+  Twitter: @kinnetica
+  From: Washington, DC
+
+  Right Brain: Genna Duberstein
+  From: Washington, DC
+
+/* THANKS */
+  Jekyll Creator: Tom Preston-Werner
+  Twitter: @mojombo
+
+/* Site */
+  Language: English
+  DOCTYPE: HTML5
