@@ -101,6 +101,10 @@ em {
   width: 80%;
 }
 
+.single-post {
+  margin: 0 80px 40px 0;
+}
+
 .post {
   margin-bottom: 40px;
 }
