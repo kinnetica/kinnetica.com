@@ -113,6 +113,12 @@ em {
   font-style: italic;
 }
 
+.single-post h2 {
+  font-family: 'Yanone Kaffeesatz';
+  font-size: 30px;
+  margin: 0;
+}
+
 .post h2 {
   font-family: 'Yanone Kaffeesatz';
   font-size: 30px;
