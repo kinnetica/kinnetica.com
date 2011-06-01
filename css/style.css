@@ -268,6 +268,10 @@ ul li {
   font-size: 40px;
 }
 
+.plus-one {
+  margin-left: 10px;
+}
+
 /* Pygment */
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #408080; font-style: italic } /* Comment */

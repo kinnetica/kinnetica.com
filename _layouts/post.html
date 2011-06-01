@@ -2,7 +2,8 @@
 layout: default
 ---
 <div class="single-post">
-  <h2 class="internal">{{ page.title }}</h2>
+  <h2 class="internal" style="display:inline;">{{ page.title }}</h2>
+  <span class="plus-one"><g:plusone size="medium"></g:plusone></span>
   <p class="date-sub-head"><a href="/about">Michael Levin</a> | {{ page.date | date: "%A, %B %d, %Y" }}</p>
   <p>{{ content }}</p>
 </div>
