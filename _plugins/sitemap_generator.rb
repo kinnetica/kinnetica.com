@@ -122,6 +122,9 @@ module Jekyll
 
       sitemap.add_element(urlset)
 
+      # Create destination directory if it doesn't exist yet, or else we cannot write our file there
+      Dir::mkdir(site.dest) if !File.directory? site.dest
+
       # File I/O: create sitemap.xml file and write out pretty-printed XML
       file = File.new(File.join(site.dest, SITEMAP_FILE_NAME), "w")
       formatter = REXML::Formatters::Pretty.new(4)
