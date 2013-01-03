@@ -46,11 +46,10 @@ Instead of going with Wordpress or Tumblr for this blog, I decided to try out [J
    within your site.
   
    One use for this is being able to change the page title depending on 
-   the page being displayed. For instance, if you have `Ham: Is It Superior 
-   To Bacon?` as the title in the front matter of a post, having `<title>{ { 
-    page.title } }</title>` (omit the spaces between the curly brackets) in your 
-   layout file will set the page title to `Ham: Is It Superior To Bacon?` within 
-   that post.
+   the page being displayed. For instance, if you have `Title: Ham: Is 
+   It Superior To Bacon?` in the front matter of a post, having 
+   `<title>&#123;&#123;page.title&#125;&#125;</title>` in your layout file 
+   will set the page title to `Ham: Is It Superior To Bacon?` within that post.
   
    Another clever use of this trick is to add a description and keyword custom 
    variable on each post and page. You can then include these custom variables 
