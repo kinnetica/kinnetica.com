@@ -1,5 +1,7 @@
+url: www.kinnetica.com
 pygments: true
 permalink: pretty
 markdown: rdiscount
 paginate: 5
 exclude: ["deploy.sh", "README.md"]
+relative_permalinks: false
